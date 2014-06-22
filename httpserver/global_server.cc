@@ -12,7 +12,8 @@
 #include "api/file.hh"
 #include "api/trace.hh"
 #include "path_holder.hh"
-
+#include "api/env.hh"
+#include "api/network.hh"
 #include <iostream>
 
 namespace httpserver {
@@ -72,6 +73,8 @@ void global_server::set_routes()
     api::file::init(_routes);
     api::jvm::init(_routes);
     api::trace::init(_routes);
+    api::env::init(_routes);
+    api::network::init(_routes);
     api::files_mapping::init(_routes);
 }
 
