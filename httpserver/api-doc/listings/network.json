@@ -1,0 +1,123 @@
+{
+   "apiVersion":"0.0.1",
+   "swaggerVersion":"1.2",
+   "basePath":"http://{{Host}}",
+   "resourcePath":"/network",
+   "produces":[
+      "application/json",
+      "application/xml"
+   ],
+   "apis":[
+      {
+         "path":"/network/ifconfig/{if}",
+         "operations":[
+            {
+               "method":"GET",
+               "summary":"Get an interface configuration",
+               "notes":"Get an interface configuration",
+               "responseClass":"string",
+               "errorResponses":[
+                  {
+                     "code":400,
+                     "reason":"Variable not found"
+                  }
+               ],
+               "nickname":"getIfconfig",
+               "produces":[
+                  "application/json",
+                  "application/xml"
+               ],
+               "parameters":[
+                  {
+                     "name":"if",
+                     "description":"name of the interface",
+                     "required":true,
+                     "allowMultiple":true,
+                     "dataType":"string",
+                     "paramType":"path"
+                  }
+               ]
+            },            
+            {
+               "method":"POST",
+               "summary":"update an environment variable",
+               "notes":"set an environment variable value",
+               "responseClass":"string",
+               "nickname":"setIfconfig",
+               "produces":[
+                  "application/json",
+                  "application/xml"
+               ],
+               "parameters":[
+                  {
+                     "name":"if",
+                     "description":"name of the environment variable",
+                     "required":true,
+                     "allowMultiple":true,
+                     "dataType":"string",
+                     "paramType":"path"
+                  },
+                  {
+                     "name":"val",
+                     "description":"The new value to set", 
+                     "required":true,
+                     "allowMultiple":false,
+                     "dataType":"string",
+                     "paramType":"query"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "path":"/network/route/",
+         "operations":[
+            {
+               "method":"GET",
+               "summary":"Get an interface configuration",
+               "notes":"Get an interface configuration",
+               "responseClass":"string",
+               "errorResponses":[
+                  {
+                     "code":400,
+                     "reason":"Variable not found"
+                  }
+               ],
+               "nickname":"getRoute",
+               "produces":[
+                  "application/json",
+                  "application/xml"
+               ],
+               "parameters":[
+                  
+               ]
+            }
+         ]
+      }
+   ],
+   "models" : {
+        "Interface": {
+            "properties": {
+             "name": {
+             	"type": "string"
+             },
+    		"addr": {
+             	"type": "string"
+             },
+			"mask": {
+             	"type": "string"
+             },
+             "broadcast": {
+             	"type": "string"
+             },
+			"flags": {
+             	"type": "string"
+             },
+             "mtu": {
+             	"type": "string"
+             }
+            }
+        }
+    }
+   
+}

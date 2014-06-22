@@ -21,6 +21,10 @@
 		{
             "path": "/../listings/trace.json",
             "description": "trace API"
+        },
+		{
+            "path": "/../listings/network.json",
+            "description": "Network API"
         }
     ]
 }
