@@ -8,6 +8,7 @@
 #include "autogen/network.json.hh"
 #include "osv/network_interface.hh"
 #include "exception.hh"
+
 namespace httpserver {
 
 namespace api {
@@ -25,9 +26,21 @@ void init(routes& routes)
 {
     network_json_init_path();
     network_json::getIfconfig.set_handler([](const_req req) {
-        interface intf(req.param.at("if").substr(1));
+        string name = req.param.at("if").substr(1);
+        interface intf(name);
         Interface f;
         f.set(intf);
+        if_data cur_data = { 0 };
+        ifnet* ifp = nullptr;
+        cout << " number of interfaces " << number_of_interfaces() << endl;
+        ifp = get_interface_by_name(name);
+        if (ifp == nullptr) {
+            throw not_found_exception(string("Interface ") + name + " not found");
+        }
+        if (!set_interface_info(ifp, cur_data)) {
+            throw bad_request_exception("Failed getting interface information");
+        }
+        cout << cur_data.ifi_type << endl;
         return formatter::to_json(f);
     });
 }
